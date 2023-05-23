@@ -1,4 +1,4 @@
-# Product information (name, price)
+# Products (name, price)
 products = {
     "Product A": 20.0,
     "Product B": 40.0,
@@ -6,19 +6,18 @@ products = {
     # Add more products as needed
 }
 
-# Discounts
 discounts = {
     "flat_10_discount": 10.0,  # Flat $10 discount if cart total exceeds $200
 }
 
-# Get quantity and gift wrapping information for each product
+# quantity and gift wrapping information for each product
 cart = {}
 for product in products:
     quantity = int(input(f"Enter the quantity of {product}: "))
     wrapped = input(f"Is {product} wrapped as a gift? (yes/no): ").lower() == "yes"
     cart[product] = {"quantity": quantity, "wrapped": wrapped}
 
-# Calculate cart details
+# cart details
 subtotal = 0.0
 discount_applied = None
 discount_amount = 0.0
@@ -50,7 +49,7 @@ if subtotal > 200.0:
     discount_applied = "flat_10_discount"
     discount_amount += discounts[discount_applied]
 
-# Calculate total
+#  Total
 total = subtotal - discount_amount + shipping_fee + gift_wrap_fee
 
 # Display cart summary
