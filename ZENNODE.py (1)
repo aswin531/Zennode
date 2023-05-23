@@ -1,0 +1,63 @@
+# Product information (name, price)
+products = {
+    "Product A": 20.0,
+    "Product B": 40.0,
+    "Product C": 50.0,
+    # Add more products as needed
+}
+
+# Discounts
+discounts = {
+    "flat_10_discount": 10.0,  # Flat $10 discount if cart total exceeds $200
+}
+
+# Get quantity and gift wrapping information for each product
+cart = {}
+for product in products:
+    quantity = int(input(f"Enter the quantity of {product}: "))
+    wrapped = input(f"Is {product} wrapped as a gift? (yes/no): ").lower() == "yes"
+    cart[product] = {"quantity": quantity, "wrapped": wrapped}
+
+# Calculate cart details
+subtotal = 0.0
+discount_applied = None
+discount_amount = 0.0
+shipping_fee = 5.0  # Example shipping fee
+gift_wrap_fee = 1.0
+total = 0.0
+
+# Display product table
+print("\nProduct\t\tPrice\tQuantity\tTotal")
+print("-------------------------------------------")
+for product, info in cart.items():
+    quantity = info["quantity"]
+    wrapped = info["wrapped"]
+    price = products[product]
+    total_price = price * quantity
+
+    if quantity > 10:
+        discount_amount += total_price * 0.05  # 5% discount for quantities > 10
+
+    if wrapped:
+        gift_wrap_fee += 0.0  # Example gift wrap fee
+
+    subtotal += total_price
+
+    print(f"{product}\t${price}\t{quantity}\t\t${total_price}")
+
+# Apply discounts if applicable
+if subtotal > 200.0:
+    discount_applied = "flat_10_discount"
+    discount_amount += discounts[discount_applied]
+
+# Calculate total
+total = subtotal - discount_amount + shipping_fee + gift_wrap_fee
+
+# Display cart summary
+print("-------------------------------------------")
+print(f"Subtotal: ${subtotal}")
+if discount_applied:
+    print(f"Discount: {discount_applied} (${discount_amount})")
+print(f"Shipping Fee: ${shipping_fee}")
+print(f"Gift Wrap Fee: ${gift_wrap_fee}")
+print(f"Total: ${total}")
